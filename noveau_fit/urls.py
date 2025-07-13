@@ -24,4 +24,6 @@ urlpatterns = [
     path('i18n/', include('django.conf.urls.i18n')),
     path('accounts/', include('allauth.urls')),  # Include allauth URLs
     path('', include('home.urls')),  # Home app URLs
+    path('products/', include('products.urls')),  # Products app URLs
+    path('checkout/', include('checkout.urls')),  # Checkout app URLs
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

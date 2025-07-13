@@ -3,31 +3,195 @@
 {% load static %}
 
 {% block page_header %}
-<div class="container header-container">
-    <div class="row">
-        <div class="col"></div>
-    </div>
-</div>
 {% endblock %}
 
 {% block content %}
-<div class="container h-100">
-    <div class="row h-100">
-        <div class="col-7 col-md-6 my-auto">
-            <h1 class="display-4 logo-font text-black">
-                Discover Timeless Style
-            </h1>
-            <h4 class="text-muted">
-                Discover the latest trends and styles in our new collection.
-                <div class="my-5">
-                    <h4>
-                        <a href="#" 
-                            class="shop-now-button btn btn-lg rounded-0 text-uppercase py-3">Shop Now</a>
-                    </h4>
-                    <p>High-quality pieces at wallet-friendly prices.</p>
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="hero-overlay">
+        <div class="container">
+            <div class="row align-items-center min-vh-75">
+                <div class="col-lg-6">
+                    <div class="hero-content text-white">
+                        <h1 class="hero-title display-3 fw-bold mb-4">
+                            Discover Timeless Style
+                        </h1>
+                        <p class="hero-subtitle lead mb-4">
+                            Elevate your wardrobe with our curated collection of premium fashion pieces.
+                            From casual essentials to statement pieces, find your perfect style.
+                        </p>
+                        <div class="hero-buttons">
+                            <a href="{% url 'product_list' %}" class="btn btn-light btn-lg me-3 px-4 py-3">
+                                Shop Collection
+                            </a>
+                            <a href="#featured-products" class="btn btn-outline-light btn-lg px-4 py-3">
+                                View Featured
+                            </a>
+                        </div>
+                    </div>
                 </div>
-
+            </div>
         </div>
     </div>
-</div>
+</section>
+
+<!-- Features Section -->
+<section class="features-section py-5 bg-light">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-4 mb-4">
+                <div class="feature-item">
+                    <i class="fas fa-shipping-fast fa-3x text-primary mb-3"></i>
+                    <h4>Free Delivery</h4>
+                    <p class="text-muted">Free delivery on orders over £50</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="feature-item">
+                    <i class="fas fa-undo fa-3x text-primary mb-3"></i>
+                    <h4>Easy Returns</h4>
+                    <p class="text-muted">30-day hassle-free returns</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="feature-item">
+                    <i class="fas fa-shield-alt fa-3x text-primary mb-3"></i>
+                    <h4>Secure Payment</h4>
+                    <p class="text-muted">Your payment information is safe</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Featured Products Section -->
+<section id="featured-products" class="featured-products py-5">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-12 text-center">
+                <h2 class="section-title display-5 fw-bold mb-3">Featured Products</h2>
+                <p class="section-subtitle text-muted lead">Discover our handpicked selection of trending items</p>
+            </div>
+        </div>
+
+        {% if featured_products %}
+        <div class="row">
+            {% for product in featured_products %}
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="product-card card h-100 border-0 shadow-sm">
+                    {% if product.image %}
+                    <img src="{{ product.image.url }}" class="card-img-top product-image" alt="{{ product.name }}">
+                    {% else %}
+                    <div class="card-img-top product-image-placeholder d-flex align-items-center justify-content-center bg-light">
+                        <i class="fas fa-image fa-3x text-muted"></i>
+                    </div>
+                    {% endif %}
+
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">{{ product.name }}</h5>
+                        <p class="card-text text-muted flex-grow-1">{{ product.description|truncatewords:10 }}</p>
+                        <div class="product-price-section mt-auto">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="product-price h5 mb-0 text-primary fw-bold">£{{ product.price }}</span>
+                                <a href="{% url 'product_detail' product.id %}" class="btn btn-primary btn-sm">
+                                    View Details
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-12 text-center">
+                <a href="{% url 'product_list' %}" class="btn btn-outline-primary btn-lg px-5">
+                    View All Products
+                </a>
+            </div>
+        </div>
+        {% else %}
+        <div class="row">
+            <div class="col-12 text-center">
+                <p class="text-muted">No featured products available at the moment.</p>
+                <a href="{% url 'product_list' %}" class="btn btn-primary">Browse All Products</a>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<!-- Newsletter Section -->
+<section class="newsletter-section py-5 bg-dark text-white">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6 text-center">
+                <h3 class="mb-3">Stay Updated</h3>
+                <p class="mb-4">Subscribe to our newsletter for the latest fashion trends and exclusive offers.</p>
+                <form class="newsletter-form">
+                    <div class="input-group">
+                        <input type="email" class="form-control form-control-lg" placeholder="Enter your email">
+                        <button class="btn btn-primary btn-lg" type="submit">Subscribe</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+.hero-section {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 80vh;
+    position: relative;
+}
+
+.min-vh-75 {
+    min-height: 75vh;
+}
+
+.hero-content {
+    z-index: 2;
+}
+
+.hero-title {
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.hero-subtitle {
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+.product-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15) !important;
+}
+
+.product-image {
+    height: 250px;
+    object-fit: cover;
+}
+
+.product-image-placeholder {
+    height: 250px;
+}
+
+.section-title {
+    color: #333;
+}
+
+.feature-item {
+    padding: 2rem 1rem;
+}
+
+.newsletter-form .form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+}
+</style>
 {% endblock %}

@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_header %}
+<div class="container header-container">
+    <div class="row">
+        <div class="col"></div>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-12 text-center">
+            <div class="card border-success mx-auto" style="max-width: 600px;">
+                <div class="card-header bg-success text-white">
+                    <h3 class="mb-0">
+                        <i class="fas fa-check-circle"></i> Order Successful!
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <h4 class="text-dark mb-4">Thank you for your order!</h4>
+                    
+                    <div class="alert alert-success border-dark">
+                        <h5 class="text-dark">Order #{{ order.id }}</h5>
+                        <p class="text-dark mb-0">
+                            <strong>Total: ${{ order.total_price|floatformat:2 }}</strong>
+                        </p>
+                        <p class="text-muted mb-0">
+                            Order placed on {{ order.created_at|date:"F d, Y \a\t g:i A" }}
+                        </p>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h6 class="text-dark">What happens next?</h6>
+                        <ul class="list-unstyled text-left">
+                            <li class="text-dark mb-2">
+                                <i class="fas fa-envelope text-primary"></i> 
+                                You'll receive an order confirmation email shortly
+                            </li>
+                            <li class="text-dark mb-2">
+                                <i class="fas fa-box text-primary"></i> 
+                                Your order will be processed within 1-2 business days
+                            </li>
+                            <li class="text-dark mb-2">
+                                <i class="fas fa-truck text-primary"></i> 
+                                You'll receive tracking information once shipped
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-2">
+                            <a href="{% url 'product_list' %}" class="btn btn-outline-dark btn-block">
+                                Continue Shopping
+                            </a>
+                        </div>
+                        <div class="col-md-6 mb-2">
+                            <a href="{% url 'home' %}" class="btn btn-dark btn-block">
+                                Back to Home
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

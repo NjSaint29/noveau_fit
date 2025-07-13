@@ -1,0 +1,26 @@
+<div class="collapse navbar-collapse" id="main-nav">
+    <ul class="navbar-nav w-auto mx-auto">
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'home' %}">Home</a>
+        </li>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="all-products-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                All Products
+            </a>
+            <div class="dropdown-menu border-0" aria-labelledby="all-products-link">
+                <a href="{% url 'product_list' %}" class="dropdown-item">All Products</a>
+                <a href="{% url 'product_list' %}?gender=M" class="dropdown-item">Men's</a>
+                <a href="{% url 'product_list' %}?gender=W" class="dropdown-item">Women's</a>
+                <a href="{% url 'product_list' %}?gender=U" class="dropdown-item">Unisex</a>
+            </div>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'product_list' %}">Shop</a>
+        </li>
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'basket_view' %}">My Basket</a>
+        </li>
+        {% endif %}
+    </ul>
+</div>
